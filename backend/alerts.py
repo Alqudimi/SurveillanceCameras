@@ -27,7 +27,7 @@ class EnhancedEmailService:
         self.smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
         self.smtp_port = int(os.environ.get('SMTP_PORT', 587))
         self.smtp_username = os.environ.get('SMTP_USERNAME')
-        self.smtp_password = os.environ.get('SMTP_PASSWORD', 'vbby lmpx gfqb yzob')
+        self.smtp_password = os.environ.get('SMTP_PASSWORD', '**** **** **** ****')
         self.from_email = os.environ.get('FROM_EMAIL', "qudimi0chat0bot@gmail.com")
         self.from_name = os.environ.get('FROM_NAME', 'نظام الإنذار والأمان الذكي')
 
