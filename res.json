@@ -1,0 +1,19 @@
+{
+  "Host": "localhost:5000",
+  "Connection": "keep-alive",
+  "Content-Length": "13885",
+  "Sec-Ch-Ua-Platform": "\"Windows\"",
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1ODQ4NTcwNywianRpIjoiNzdkMmE4YjQtYzlhYS00YWZjLTllN2UtNGI1MWQyMWU2ZTM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3NTg0ODU3MDcsImNzcmYiOiJmZmRhOGZkMy0zNDg4LTRlYjMtYjljOC01MTRlYTgxODY5ZDAiLCJleHAiOjE3NTg1NzIxMDd9.wFG2M6TIlWq4iFJRv0I0RQnMSLkoJoIDxHCA60N1mvE",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+  "Sec-Ch-Ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
+  "Content-Type": "multipart/form-data",
+  "Sec-Ch-Ua-Mobile": "?0",
+  "Accept": "*/*",
+  "Origin": "null",
+  "Sec-Fetch-Site": "cross-site",
+  "Sec-Fetch-Mode": "cors",
+  "Sec-Fetch-Dest": "empty",
+  "Accept-Encoding": "gzip, deflate, br, zstd",
+  "Accept-Language": "en-US,en;q=0.9,ar;q=0.8"
+}
+WARNING:alerts:إعدادات البريد الإلكتروني غير مكتملة

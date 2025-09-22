@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تصنيف الصور - نتائج التحليل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <h1>نظام الذكاء الاصطناعي لتحليل الصور</h1>
+            <p id="status-message">جارٍ تحميل نتائج تحليل الصورة...</p>
+        </div>
+
+        <div class="main-card fade-in" id="results-card" style="display: none;">
+            <div class="card-header">
+                <h2><i class="fas fa-image"></i> نتائج تحليل الصورة</h2>
+                <div class="button" id="toggleViewBtn">
+                    <i class="fas fa-expand"></i> عرض موسع
+                </div>
+            </div>
+            <div class="card-body" id="results-body">
+                <!-- سيتم تعبئة المحتوى بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <div class="footer fade-in" id="results-footer" style="display: none;">
+            <p id="processing-time">تم إنشاء هذه النتائج في 21/09/2025 الساعة 22:01:53</p>
+        </div>
+    </div>
+
+    <script>
+        // بيانات المثال (يمكن استبدالها بأي بيانات أخرى)
+        const classificationData = {
+            "msg": "تم تصنيف الصورة بنجاح",
+            "filename": "20250921_220153_accident.jpg",
+            "file_path": "uploads\\test\\20250921_220153_accident.jpg",
+            "classification_id": 16,
+            "overall_risk": "high",
+            "processing_time": 3.3413028717041016,
+            "results": [
+                {
+                    "category": "accident",
+                    "class_name": "اسم_الصنف_1",
+                    "confidence": 0.7748448252677917,
+                    "risk_level": "medium",
+                    "arabic_name": "الحادث"
+                },
+                {
+                    "category": "violence", 
+                    "class_name": "اسم_الصنف_2",
+                    "confidence": 0.9997774958610535,
+                    "risk_level": "high",
+                    "arabic_name": "العنف"
+                }
+            ],
+            "alerts_triggered": [
+                "تنبيه violence: تم اكتشاف no_violence بثقة 99.98%"
+            ],
+            "alerts_sent": 2,
+            "alert_details": [
+                {
+                    "category": "accident",
+                    "confidence": 0.7748448252677917,
+                    "message": "مرحباً test,\n            \n            تم اكتشاف الحادث بثقة 77.48%.\n            \n            مستوى الخطورة: متوسط.\n            \n            الوقت: 2025-09-21 22:01:53.\n            \n            اتخذ الاحتياطات اللازمة.",
+                    "risk_level": "medium",
+                    "sent_methods": ["email"],
+                    "title": "تنبيه أمان: تم اكتشاف حادث"
+                },
+                {
+                    "category": "violence",
+                    "confidence": 0.9997774958610535,
+                    "message": "مرحباً test,\n            \n            تم اكتشاف العنف بثقة 99.98%.\n            \n            مستوى الخطورة: عالي.\n            \n            الوقت: 2025-09-21 22:01:53.\n            \n            اتخذ الاحتياطات اللازمة.",
+                    "risk_level": "high", 
+                    "sent_methods": ["email"],
+                    "title": "تنبيه أمان: تم اكتشاف عنف"
+                }
+            ]
+        };
+
+        function getRiskLevelText(level) {
+            const levels = {
+                'high': 'عالي',
+                'medium': 'متوسط',
+                'low': 'منخفض'
+            };
+            return levels[level] || level;
+        }
+
+        function getRiskLevelClass(level) {
+            const levels = {
+                'high': 'risk-high',
+                'medium': 'risk-medium',
+                'low': 'risk-low'
+            };
+            return levels[level] || 'risk-medium';
+        }
+
+        function renderClassificationData(data) {
+            document.getElementById('status-message').textContent = data.msg;
+            
+            const avgConfidence = data.results.reduce((sum, result) => sum + result.confidence, 0) / data.results.length * 100;
+            
+            // إنشاء محتوى البطاقة الرئيسية
+            const resultsBody = document.getElementById('results-body');
+            resultsBody.innerHTML = `
+                <div class="grid-container">
+                    <div class="card">
+                        <h3><i class="fas fa-info-circle"></i> معلومات الملف</h3>
+                        <div class="info-item">
+                            <span class="info-label">اسم الملف:</span>
+                            <span class="info-value">${data.filename}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">مسار الملف:</span>
+                            <span class="info-value">${data.file_path}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">معرف التصنيف:</span>
+                            <span class="info-value">${data.classification_id}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">وقت المعالجة:</span>
+                            <span class="info-value">${data.processing_time.toFixed(2)} ثانية</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> مستوى الخطورة</h3>
+                        <div class="info-item">
+                            <span class="info-label">الحالة العامة:</span>
+                            <span class="info-value">
+                                <span class="risk-badge ${getRiskLevelClass(data.overall_risk)}">${getRiskLevelText(data.overall_risk)}</span>
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">التنبيهات المشغلة:</span>
+                            <span class="info-value">${data.alerts_triggered.length} تنبيهات</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">التنبيهات المرسلة:</span>
+                            <span class="info-value">${data.alerts_sent} تنبيهات</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">مستوى الثقة العام:</span>
+                            <span class="info-value">${avgConfidence.toFixed(2)}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress ${getRiskLevelClass(data.overall_risk)}" style="width: ${avgConfidence.toFixed(2)}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3><i class="fas fa-tachometer-alt"></i> إحصائيات التحليل</h3>
+                        <div class="stats-container">
+                            <div class="stat">
+                                <div class="stat-value">${data.results.length}</div>
+                                <div class="stat-label">الكيانات المكتشفة</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">${(Math.min(...data.results.map(r => r.confidence)) * 100).toFixed(2)}%</div>
+                                <div class="stat-label">أقل ثقة</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">${(Math.max(...data.results.map(r => r.confidence)) * 100).toFixed(2)}%</div>
+                                <div class="stat-label">أعلى ثقة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-search"></i> نتائج التحليل التفصيلية</h3>
+                    <div class="grid-container">
+                        ${data.results.map((result, index) => `
+                            <div class="card ${index === 0 ? 'glow' : 'pulse'}">
+                                <h3><i class="fas ${result.category === 'accident' ? 'fa-car-crash' : 'fa-fist-raised'}"></i> ${result.arabic_name}</h3>
+                                <div class="info-item">
+                                    <span class="info-label">الفئة:</span>
+                                    <span class="info-value">${result.category}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">مستوى الثقة:</span>
+                                    <span class="info-value">${(result.confidence * 100).toFixed(2)}%</span>
+                                </div>
+                                <div class="confidence-meter">
+                                    <div class="confidence-level" style="width: ${result.confidence * 100}%">${(result.confidence * 100).toFixed(2)}%</div>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">مستوى الخطورة:</span>
+                                    <span class="info-value">
+                                        <span class="risk-badge ${getRiskLevelClass(result.risk_level)}">${getRiskLevelText(result.risk_level)}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-bell"></i> التنبيهات المشغلة</h3>
+                    ${data.alerts_triggered.map(alert => `
+                        <div class="alert-container">
+                            <h4><i class="fas fa-exclamation-circle"></i> تنبيه تم اكتشافه</h4>
+                            <p>${alert}</p>
+                        </div>
+                    `).join('')}
+
+                    <h3 style="margin-top: 30px;"><i class="fas fa-paper-plane"></i> التفاصيل المرسلة</h3>
+                    ${data.alert_details.map(alert => `
+                        <div class="alert-detail">
+                            <h4><i class="fas fa-envelope"></i> ${alert.title}</h4>
+                            <div class="alert-message">${alert.message}</div>
+                            <div style="margin-top: 15px;">
+                                <span class="info-label">طرق الإرسال:</span>
+                                ${alert.sent_methods.map(method => `
+                                    <span class="method-badge">${method === 'email' ? 'البريد الإلكتروني' : method}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            // تحديث وقت المعالجة في الفوتر
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ar-EG');
+            const timeStr = now.toLocaleTimeString('ar-EG');
+            document.getElementById('processing-time').textContent = `تم إنشاء هذه النتائج في ${dateStr} الساعة ${timeStr}`;
+            
+            // إظهار العناصر المخفية
+            document.getElementById('results-card').style.display = 'block';
+            document.getElementById('results-footer').style.display = 'block';
+            
+            // تشغيل تأثيرات الرسوم المتحركة
+            animateConfidenceBars();
+        }
+
+        function animateConfidenceBars() {
+            const confidenceLevels = document.querySelectorAll('.confidence-level');
+            confidenceLevels.forEach(level => {
+                const width = level.style.width;
+                level.style.width = '0';
+                setTimeout(() => {
+                    level.style.width = width;
+                }, 500);
+            });
+        }
+
+        // عند تحميل الصفحة، نعرض البيانات بعد تأخير بسيط لمحاكاة التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                renderClassificationData(classificationData);
+                
+                // إضافة مستمع حدث للزر
+                const toggleBtn = document.getElementById('toggleViewBtn');
+                toggleBtn.addEventListener('click', function() {
+                    this.classList.toggle('pulse');
+                });
+            }, 1500);
+        });
+
+        // يمكنك استدعاء renderClassificationData(classificationData) في أي وقت لتمرير بيانات جديدة
+    </script>
+</body>
+</html>

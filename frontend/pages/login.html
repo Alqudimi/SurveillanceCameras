@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - نظام الأمان الذكي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/api.js"></script>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>نظام الأمان الذكي</h1>
+                </div>
+                <h2>تسجيل الدخول</h2>
+                <p>أهلاً بعودتك! سجل دخولك للمتابعة</p>
+            </div>
+
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" required placeholder="أدخل البريد الإلكتروني">
+                    </div>
+                    <div class="form-error" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required placeholder="أدخل كلمة المرور">
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="form-error" id="passwordError"></div>
+                </div>
+
+                <div class="form-options">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">تذكرني</label>
+                    </div>
+                    <a href="#" class="link forgot-password">نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+                    <span class="btn-text">تسجيل الدخول</span>
+                    <div class="btn-loader">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+
+                <div class="form-message" id="formMessage"></div>
+            </form>
+
+            <div class="auth-divider">
+                <span>أو</span>
+            </div>
+
+            <div class="social-login">
+                <button class="btn btn-social btn-google">
+                    <i class="fab fa-google"></i>
+                    تسجيل الدخول بـ Google
+                </button>
+                <button class="btn btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    تسجيل الدخول بـ Facebook
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <p>ليس لديك حساب؟ <a href="register.html" class="link">إنشاء حساب جديد</a></p>
+            </div>
+        </div>
+
+        <div class="auth-sidebar">
+            <div class="sidebar-content">
+                <h3>مرحباً بعودتك!</h3>
+                <p>استمتع بجميع ميزات النظام المتطورة</p>
+                
+                <div class="stats-preview">
+                    <div class="stat-preview">
+                        <div class="stat-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">1,234</span>
+                            <span class="stat-label">صورة تم تحليلها</span>
+                        </div>
+                    </div>
+                    <div class="stat-preview">
+                        <div class="stat-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">567</span>
+                            <span class="stat-label">تنبيه تم إرساله</span>
+                        </div>
+                    </div>
+                    <div class="stat-preview">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">89</span>
+                            <span class="stat-label">مستخدم نشط</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h4>النشاط الأخير</h4>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <span>تم تحليل صورة جديدة</span>
+                                <small>منذ 5 دقائق</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-exclamation"></i>
+                            </div>
+                            <div class="activity-content">
+                                <span>تنبيه حركة مرور</span>
+                                <small>منذ 15 دقيقة</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon info">
+                                <i class="fas fa-info"></i>
+                            </div>
+                            <div class="activity-content">
+                                <span>تحديث الإعدادات</span>
+                                <small>منذ ساعة</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-home">
+        <a href="../index.html" class="btn btn-secondary">
+            <i class="fas fa-arrow-right"></i>
+            العودة للرئيسية
+        </a>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>
+

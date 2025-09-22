@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - نظام الأمان الذكي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/api.js"></script>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>نظام الأمان الذكي</h1>
+                </div>
+                <h2>إنشاء حساب جديد</h2>
+                <p>انضم إلينا واستمتع بحماية ذكية متطورة</p>
+            </div>
+
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" required placeholder="أدخل اسم المستخدم">
+                    </div>
+                    <div class="form-error" id="usernameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" required placeholder="أدخل البريد الإلكتروني">
+                    </div>
+                    <div class="form-error" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required placeholder="أدخل كلمة المرور">
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill"></div>
+                        </div>
+                        <span class="strength-text">قوة كلمة المرور</span>
+                    </div>
+                    <div class="form-error" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="أعد إدخال كلمة المرور">
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="form-error" id="confirmPasswordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            أوافق على <a href="#" class="link">شروط الاستخدام</a> و <a href="#" class="link">سياسة الخصوصية</a>
+                        </label>
+                    </div>
+                    <div class="form-error" id="termsError"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">أرغب في تلقي النشرة الإخبارية والتحديثات</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" id="registerBtn">
+                    <span class="btn-text">إنشاء الحساب</span>
+                    <div class="btn-loader">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+
+                <div class="form-message" id="formMessage"></div>
+            </form>
+
+            <div class="auth-footer">
+                <p>لديك حساب بالفعل؟ <a href="login.html" class="link">تسجيل الدخول</a></p>
+            </div>
+        </div>
+
+        <div class="auth-sidebar">
+            <div class="sidebar-content">
+                <h3>مرحباً بك في نظام الأمان الذكي</h3>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <h4>ذكاء اصطناعي متطور</h4>
+                            <p>تقنيات حديثة لتحليل الصور بدقة عالية</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h4>سرعة فائقة</h4>
+                            <p>نتائج فورية في أقل من ثانية واحدة</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>أمان وخصوصية</h4>
+                            <p>حماية كاملة لبياناتك الشخصية</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>متاح 24/7</h4>
+                            <p>خدمة مستمرة على مدار الساعة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-home">
+        <a href="../index.html" class="btn btn-secondary">
+            <i class="fas fa-arrow-right"></i>
+            العودة للرئيسية
+        </a>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>
+

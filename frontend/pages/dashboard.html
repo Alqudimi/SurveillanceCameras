@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - نظام الأمان الذكي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>نظام الأمان</span>
+                </div>
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>لوحة التحكم</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="upload.html" class="nav-link">
+                            <i class="fas fa-upload"></i>
+                            <span>رفع صورة</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span>التاريخ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>الإعدادات</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <span>الملف الشخصي</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">أحمد محمد</span>
+                        <span class="user-email" id="userEmail">ahmed@example.com</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>لوحة التحكم</h1>
+                    <p>مرحباً بك، <span id="welcomeName">أحمد</span>! إليك ملخص نشاطك اليوم</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="window.location.href='upload.html'">
+                            <i class="fas fa-plus"></i>
+                            رفع صورة جديدة
+                        </button>
+                        <div class="notifications">
+                            <button class="notification-btn">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge">3</span>
+                            </button>
+                            <div class="notification-dropdown">
+                                <div class="notification-header">
+                                    <h3>الإشعارات</h3>
+                                    <button class="mark-all-read">تحديد الكل كمقروء</button>
+                                </div>
+                                <div class="notification-list">
+                                    <div class="notification-item unread">
+                                        <div class="notification-icon danger">
+                                            <i class="fas fa-fire"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <h4>تم اكتشاف حريق</h4>
+                                            <p>تم تصنيف صورة كحريق كبير</p>
+                                            <small>منذ 5 دقائق</small>
+                                        </div>
+                                    </div>
+                                    <div class="notification-item unread">
+                                        <div class="notification-icon warning">
+                                            <i class="fas fa-car"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <h4>ازدحام مروري</h4>
+                                            <p>تم رصد ازدحام شديد في المنطقة</p>
+                                            <small>منذ 15 دقيقة</small>
+                                        </div>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-icon success">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <h4>تم تحليل الصورة</h4>
+                                            <p>تم تصنيف الصورة بنجاح</p>
+                                            <small>منذ ساعة</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="totalImages">247</h3>
+                            <p class="stat-label">إجمالي الصور</p>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="alertsCount">23</h3>
+                            <p class="stat-label">التنبيهات النشطة</p>
+                            <div class="stat-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-5%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="avgTime">0.8</h3>
+                            <p class="stat-label">متوسط وقت التحليل (ثانية)</p>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>تحسن 15%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="accuracy">94.2</h3>
+                            <p class="stat-label">دقة التصنيف (%)</p>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+2.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>التصنيفات الأخيرة</h3>
+                            <a href="history.html" class="view-all">عرض الكل</a>
+                        </div>
+                        <div class="card-content">
+                            <div class="recent-classifications">
+                                <div class="classification-item">
+                                    <div class="classification-image">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="classification-info">
+                                        <h4>صورة_001.jpg</h4>
+                                        <div class="classification-result">
+                                            <span class="result-badge fire">حريق كبير</span>
+                                            <span class="confidence">92%</span>
+                                        </div>
+                                        <small>منذ 5 دقائق</small>
+                                    </div>
+                                    <div class="classification-actions">
+                                        <button class="btn btn-sm btn-secondary">عرض</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="classification-item">
+                                    <div class="classification-image">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="classification-info">
+                                        <h4>صورة_002.jpg</h4>
+                                        <div class="classification-result">
+                                            <span class="result-badge traffic">ازدحام مروري</span>
+                                            <span class="confidence">87%</span>
+                                        </div>
+                                        <small>منذ 15 دقيقة</small>
+                                    </div>
+                                    <div class="classification-actions">
+                                        <button class="btn btn-sm btn-secondary">عرض</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="classification-item">
+                                    <div class="classification-image">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="classification-info">
+                                        <h4>صورة_003.jpg</h4>
+                                        <div class="classification-result">
+                                            <span class="result-badge normal">طبيعي</span>
+                                            <span class="confidence">95%</span>
+                                        </div>
+                                        <small>منذ 30 دقيقة</small>
+                                    </div>
+                                    <div class="classification-actions">
+                                        <button class="btn btn-sm btn-secondary">عرض</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>إحصائيات التصنيف</h3>
+                            <div class="chart-controls">
+                                <select id="chartPeriod">
+                                    <option value="today">اليوم</option>
+                                    <option value="week">هذا الأسبوع</option>
+                                    <option value="month">هذا الشهر</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="chart-container">
+                                <canvas id="classificationChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>توزيع الفئات</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="category-stats">
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-icon traffic">
+                                            <i class="fas fa-car"></i>
+                                        </div>
+                                        <div class="category-details">
+                                            <span class="category-name">حركة المرور</span>
+                                            <span class="category-count">45%</span>
+                                        </div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-fill" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-icon fire">
+                                            <i class="fas fa-fire"></i>
+                                        </div>
+                                        <div class="category-details">
+                                            <span class="category-name">الحرائق</span>
+                                            <span class="category-count">25%</span>
+                                        </div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-fill" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-icon accident">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="category-details">
+                                            <span class="category-name">الحوادث</span>
+                                            <span class="category-count">20%</span>
+                                        </div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-fill" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="category-item">
+                                    <div class="category-info">
+                                        <div class="category-icon violence">
+                                            <i class="fas fa-fist-raised"></i>
+                                        </div>
+                                        <div class="category-details">
+                                            <span class="category-name">العنف</span>
+                                            <span class="category-count">10%</span>
+                                        </div>
+                                    </div>
+                                    <div class="category-bar">
+                                        <div class="category-fill" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>الإجراءات السريعة</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="quick-actions">
+                                <button class="quick-action" onclick="window.location.href='upload.html'">
+                                    <div class="action-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </div>
+                                    <span>رفع صورة</span>
+                                </button>
+                                
+                                <button class="quick-action" onclick="window.location.href='history.html'">
+                                    <div class="action-icon">
+                                        <i class="fas fa-history"></i>
+                                    </div>
+                                    <span>عرض التاريخ</span>
+                                </button>
+                                
+                                <button class="quick-action" onclick="exportData()">
+                                    <div class="action-icon">
+                                        <i class="fas fa-download"></i>
+                                    </div>
+                                    <span>تصدير البيانات</span>
+                                </button>
+                                
+                                <button class="quick-action" onclick="window.location.href='settings.html'">
+                                    <div class="action-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <span>الإعدادات</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
+

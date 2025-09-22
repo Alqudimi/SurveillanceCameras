@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - نظام الأمان الذكي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>نظام الأمان</span>
+                </div>
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>لوحة التحكم</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="upload.html" class="nav-link">
+                            <i class="fas fa-upload"></i>
+                            <span>رفع صورة</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span>التاريخ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>الإعدادات</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <span>الملف الشخصي</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">أحمد محمد</span>
+                        <span class="user-email" id="userEmail">ahmed@example.com</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>الإعدادات</h1>
+                    <p>إدارة إعدادات النظام والتنبيهات</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="resetSettings()">
+                            <i class="fas fa-undo"></i>
+                            إعادة تعيين
+                        </button>
+                        <button class="btn btn-primary" onclick="saveSettings()">
+                            <i class="fas fa-save"></i>
+                            حفظ الإعدادات
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="settings-content">
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="notifications" onclick="switchTab('notifications')">
+                        <i class="fas fa-bell"></i>
+                        التنبيهات
+                    </button>
+                    <button class="tab-btn" data-tab="alerts" onclick="switchTab('alerts')">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        الإنذارات
+                    </button>
+                    <button class="tab-btn" data-tab="contacts" onclick="switchTab('contacts')">
+                        <i class="fas fa-address-book"></i>
+                        جهات الاتصال
+                    </button>
+                    <button class="tab-btn" data-tab="system" onclick="switchTab('system')">
+                        <i class="fas fa-cogs"></i>
+                        النظام
+                    </button>
+                    <button class="tab-btn" data-tab="security" onclick="switchTab('security')">
+                        <i class="fas fa-lock"></i>
+                        الأمان
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="notifications">
+                    <div class="settings-section">
+                        <h3>إعدادات التنبيهات</h3>
+                        <div class="settings-grid">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>تنبيهات البريد الإلكتروني</h4>
+                                    <p>تلقي التنبيهات عبر البريد الإلكتروني</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="emailNotifications" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>تنبيهات الرسائل النصية</h4>
+                                    <p>تلقي التنبيهات عبر الرسائل النصية</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="smsNotifications">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>تنبيهات المتصفح</h4>
+                                    <p>عرض التنبيهات في المتصفح</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="browserNotifications" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>تنبيهات صوتية</h4>
+                                    <p>تشغيل أصوات التنبيه</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="soundNotifications" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="alerts">
+                    <div class="settings-section">
+                        <h3>إعدادات الإنذارات</h3>
+                        <div class="alert-settings">
+                            <div class="alert-category">
+                                <div class="category-header">
+                                    <div class="category-icon fire">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h4>الحرائق</h4>
+                                        <p>إعدادات تنبيهات الحرائق</p>
+                                    </div>
+                                </div>
+                                <div class="category-settings">
+                                    <div class="setting-row">
+                                        <label>مستوى الثقة المطلوب:</label>
+                                        <select id="fireConfidence">
+                                            <option value="60">60%</option>
+                                            <option value="70" selected>70%</option>
+                                            <option value="80">80%</option>
+                                            <option value="90">90%</option>
+                                        </select>
+                                    </div>
+                                    <div class="setting-row">
+                                        <label>إرسال تنبيه فوري:</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="fireImmediate" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert-category">
+                                <div class="category-header">
+                                    <div class="category-icon traffic">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h4>حركة المرور</h4>
+                                        <p>إعدادات تنبيهات المرور</p>
+                                    </div>
+                                </div>
+                                <div class="category-settings">
+                                    <div class="setting-row">
+                                        <label>مستوى الثقة المطلوب:</label>
+                                        <select id="trafficConfidence">
+                                            <option value="60">60%</option>
+                                            <option value="70">70%</option>
+                                            <option value="80" selected>80%</option>
+                                            <option value="90">90%</option>
+                                        </select>
+                                    </div>
+                                    <div class="setting-row">
+                                        <label>إرسال تنبيه فوري:</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="trafficImmediate">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert-category">
+                                <div class="category-header">
+                                    <div class="category-icon accident">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h4>الحوادث</h4>
+                                        <p>إعدادات تنبيهات الحوادث</p>
+                                    </div>
+                                </div>
+                                <div class="category-settings">
+                                    <div class="setting-row">
+                                        <label>مستوى الثقة المطلوب:</label>
+                                        <select id="accidentConfidence">
+                                            <option value="60">60%</option>
+                                            <option value="70" selected>70%</option>
+                                            <option value="80">80%</option>
+                                            <option value="90">90%</option>
+                                        </select>
+                                    </div>
+                                    <div class="setting-row">
+                                        <label>إرسال تنبيه فوري:</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="accidentImmediate" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert-category">
+                                <div class="category-header">
+                                    <div class="category-icon violence">
+                                        <i class="fas fa-fist-raised"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h4>العنف</h4>
+                                        <p>إعدادات تنبيهات العنف</p>
+                                    </div>
+                                </div>
+                                <div class="category-settings">
+                                    <div class="setting-row">
+                                        <label>مستوى الثقة المطلوب:</label>
+                                        <select id="violenceConfidence">
+                                            <option value="60" selected>60%</option>
+                                            <option value="70">70%</option>
+                                            <option value="80">80%</option>
+                                            <option value="90">90%</option>
+                                        </select>
+                                    </div>
+                                    <div class="setting-row">
+                                        <label>إرسال تنبيه فوري:</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="violenceImmediate" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="contacts">
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <h3>جهات الاتصال الطارئة</h3>
+                            <button class="btn btn-primary" onclick="addContact()">
+                                <i class="fas fa-plus"></i>
+                                إضافة جهة اتصال
+                            </button>
+                        </div>
+                        <div class="contacts-list" id="contactsList">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="system">
+                    <div class="settings-section">
+                        <h3>إعدادات النظام</h3>
+                        <div class="settings-grid">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>حفظ الصور تلقائياً</h4>
+                                    <p>حفظ الصور المرفوعة في النظام</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="autoSaveImages" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>التحديث التلقائي</h4>
+                                    <p>تحديث البيانات تلقائياً كل 30 ثانية</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="autoRefresh" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>الوضع المظلم</h4>
+                                    <p>استخدام الوضع المظلم للواجهة</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="darkMode">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>لغة النظام</h4>
+                                    <p>اختيار لغة واجهة النظام</p>
+                                </div>
+                                <div class="setting-control">
+                                    <select id="systemLanguage">
+                                        <option value="ar" selected>العربية</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="security">
+                    <div class="settings-section">
+                        <h3>إعدادات الأمان</h3>
+                        <div class="security-settings">
+                            <div class="security-item">
+                                <div class="security-header">
+                                    <h4>تغيير كلمة المرور</h4>
+                                    <p>تحديث كلمة المرور الخاصة بك</p>
+                                </div>
+                                <form class="password-form" id="passwordForm">
+                                    <div class="form-group">
+                                        <label>كلمة المرور الحالية</label>
+                                        <div class="input-group">
+                                            <i class="fas fa-lock"></i>
+                                            <input type="password" id="currentPassword" required>
+                                            <button type="button" class="password-toggle" onclick="togglePassword('currentPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>كلمة المرور الجديدة</label>
+                                        <div class="input-group">
+                                            <i class="fas fa-lock"></i>
+                                            <input type="password" id="newPassword" required>
+                                            <button type="button" class="password-toggle" onclick="togglePassword('newPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>تأكيد كلمة المرور الجديدة</label>
+                                        <div class="input-group">
+                                            <i class="fas fa-lock"></i>
+                                            <input type="password" id="confirmPassword" required>
+                                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i>
+                                        تحديث كلمة المرور
+                                    </button>
+                                </form>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div class="security-header">
+                                    <h4>جلسات النشاط</h4>
+                                    <p>إدارة الجلسات النشطة</p>
+                                </div>
+                                <div class="sessions-list" id="sessionsList">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="contactModalTitle">إضافة جهة اتصال</h3>
+                <button class="modal-close" onclick="closeContactModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>الاسم</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" id="contactPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="contactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>النوع</label>
+                        <select id="contactType">
+                            <option value="emergency">طوارئ</option>
+                            <option value="police">شرطة</option>
+                            <option value="fire">إطفاء</option>
+                            <option value="medical">طبي</option>
+                            <option value="personal">شخصي</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeContactModal()">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveContact()">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="formMessage" class="form-message" style="display: none;"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/settings.js"></script>
+</body>
+</html>
+

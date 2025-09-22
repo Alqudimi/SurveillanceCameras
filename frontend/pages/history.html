@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تاريخ التصنيفات - نظام الأمان الذكي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>نظام الأمان</span>
+                </div>
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>لوحة التحكم</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="upload.html" class="nav-link">
+                            <i class="fas fa-upload"></i>
+                            <span>رفع صورة</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span>التاريخ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>الإعدادات</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <span>الملف الشخصي</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">أحمد محمد</span>
+                        <span class="user-email" id="userEmail">ahmed@example.com</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>تاريخ التصنيفات</h1>
+                    <p>عرض جميع التصنيفات السابقة والبحث فيها</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="exportHistory()">
+                            <i class="fas fa-download"></i>
+                            تصدير البيانات
+                        </button>
+                        <button class="btn btn-primary" onclick="window.location.href='upload.html'">
+                            <i class="fas fa-plus"></i>
+                            تصنيف جديد
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="history-content">
+                <div class="history-filters">
+                    <div class="filters-card">
+                        <div class="filters-header">
+                            <h3>البحث والفلترة</h3>
+                            <button class="btn btn-sm btn-secondary" onclick="clearFilters()">
+                                <i class="fas fa-times"></i>
+                                مسح الفلاتر
+                            </button>
+                        </div>
+                        <div class="filters-content">
+                            <div class="filter-row">
+                                <div class="filter-group">
+                                    <label for="searchInput">البحث</label>
+                                    <div class="input-group">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="searchInput" placeholder="البحث في أسماء الملفات...">
+                                    </div>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="categoryFilter">الفئة</label>
+                                    <select id="categoryFilter">
+                                        <option value="">جميع الفئات</option>
+                                        <option value="fire">حريق</option>
+                                        <option value="traffic">حركة مرور</option>
+                                        <option value="accident">حادث</option>
+                                        <option value="violence">عنف</option>
+                                        <option value="normal">طبيعي</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-group">
+                                    <label for="dateFrom">من تاريخ</label>
+                                    <input type="date" id="dateFrom">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="dateTo">إلى تاريخ</label>
+                                    <input type="date" id="dateTo">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="confidenceFilter">مستوى الثقة</label>
+                                    <select id="confidenceFilter">
+                                        <option value="">جميع المستويات</option>
+                                        <option value="high">عالي (80%+)</option>
+                                        <option value="medium">متوسط (60-79%)</option>
+                                        <option value="low">منخفض (أقل من 60%)</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <button class="btn btn-primary" onclick="applyFilters()">
+                                        <i class="fas fa-filter"></i>
+                                        تطبيق الفلاتر
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-stats">
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="totalClassifications">0</span>
+                                <span class="stat-label">إجمالي التصنيفات</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="todayClassifications">0</span>
+                                <span class="stat-label">تصنيفات اليوم</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="alertsGenerated">0</span>
+                                <span class="stat-label">تنبيهات مُرسلة</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="avgAccuracy">0</span>
+                                <span class="stat-label">متوسط الدقة (%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-table-container">
+                    <div class="table-header">
+                        <h3>سجل التصنيفات</h3>
+                        <div class="table-actions">
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="table" onclick="switchView('table')">
+                                    <i class="fas fa-table"></i>
+                                </button>
+                                <button class="view-btn" data-view="grid" onclick="switchView('grid')">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                            </div>
+                            <select id="sortBy">
+                                <option value="date_desc">الأحدث أولاً</option>
+                                <option value="date_asc">الأقدم أولاً</option>
+                                <option value="confidence_desc">الثقة (عالي إلى منخفض)</option>
+                                <option value="confidence_asc">الثقة (منخفض إلى عالي)</option>
+                                <option value="filename_asc">اسم الملف (أ-ي)</option>
+                                <option value="filename_desc">اسم الملف (ي-أ)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-view" id="tableView">
+                        <div class="table-wrapper">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>الصورة</th>
+                                        <th>اسم الملف</th>
+                                        <th>النتيجة</th>
+                                        <th>مستوى الثقة</th>
+                                        <th>التاريخ والوقت</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historyTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="grid-view" id="gridView" style="display: none;">
+                        <div class="history-grid" id="historyGrid">
+                        </div>
+                    </div>
+
+                    <div class="table-footer">
+                        <div class="pagination-info">
+                            <span id="paginationInfo">عرض 0 من 0 نتيجة</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="btn btn-sm btn-secondary" id="prevPage" onclick="changePage(-1)">
+                                <i class="fas fa-chevron-right"></i>
+                                السابق
+                            </button>
+                            <div class="page-numbers" id="pageNumbers"></div>
+                            <button class="btn btn-sm btn-secondary" id="nextPage" onclick="changePage(1)">
+                                التالي
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="classificationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تفاصيل التصنيف</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">إغلاق</button>
+                <button class="btn btn-danger" onclick="deleteClassification()">حذف</button>
+                <button class="btn btn-primary" onclick="downloadClassification()">تحميل التقرير</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/history.js"></script>
+</body>
+</html>
+
